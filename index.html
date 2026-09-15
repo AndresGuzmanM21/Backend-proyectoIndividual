@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>TaskFlow</title>
+
+    <link rel="stylesheet" href="css/estilos.css" />
+
+    <script src="./js/taskManager.js" defer></script>
+
+    <script src="./js/index.js" defer></script>
+  </head>
+
+  <body>
+    <div class="contenedor">
+      <!-- MENU LATERAL -->
+
+      <aside class="sidebar">
+        <div class="menu-superior">
+          <h2>TaskFlow</h2>
+
+          <button id="btnPanel">🏠 Panel</button>
+
+          <button id="btnMisTareas">📋 Mis tareas</button>
+
+          <button id="btnProyectos">📁 Proyectos</button>
+
+          <button id="btnCalendario">📅 Calendario</button>
+        </div>
+
+        <div class="menu-inferior">
+          <button class="nueva" id="btnNuevatarea">+ Nueva tarea</button>
+
+          <p id="btnConfiguracion">⚙ Configuración</p>
+
+          <p id="btnAyuda">❓ Ayuda</p>
+        </div>
+      </aside>
+
+      <!-- CONTENIDO PRINCIPAL -->
+
+      <main class="principal">
+        <!-- BARRA SUPERIOR -->
+
+        <header class="barra-superior">
+          <div class="buscador">
+            <input
+              type="text"
+              id="buscarTarea"
+              placeholder="🔍 Buscar tareas..."
+            />
+          </div>
+
+          <div class="perfil">
+            <!-- NOTIFICACIONES -->
+
+            <div class="notificaciones">
+              🔔
+
+              <span id="numeroNotificaciones"> 0 </span>
+            </div>
+
+            <!-- FOTO DE PERFIL -->
+
+            <div class="foto-perfil" id="btnPerfil">
+              <img
+                src="https://avatars.githubusercontent.com/u/297227402"
+                alt="Foto de perfil"
+              />
+            </div>
+
+            <div class="usuario">
+              <h4>Andrés</h4>
+
+              <p>Perfil</p>
+            </div>
+          </div>
+        </header>
+
+        <!-- BIENVENIDA -->
+
+        <section class="bienvenida">
+          <h1>¡Hola, Andrés! 👋</h1>
+
+          <p>Bienvenido nuevamente.</p>
+        </section>
+
+        <!-- TARJETAS -->
+
+        <section class="tarjetas">
+          <div class="card">
+            <h2 id="totalTareas">0</h2>
+
+            <p>Tareas Totales</p>
+          </div>
+
+          <div class="card">
+            <h2 id="tareasPendientes">0</h2>
+
+            <p>Pendientes</p>
+          </div>
+
+          <div class="card">
+            <h2 id="tareasCompletadas">0</h2>
+
+            <p>Completadas</p>
+          </div>
+        </section>
+
+        <!-- CONTENIDO -->
+
+        <div class="contenido">
+          <!-- IZQUIERDA -->
+
+          <section class="izquierda">
+            <!-- TAREAS -->
+
+            <div class="tareas">
+              <h2>Mis tareas</h2>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tarea</th>
+
+                    <th>Fecha</th>
+
+                    <th>Estado</th>
+
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+
+                <tbody id="tablaTareas"></tbody>
+              </table>
+
+              <p id="mensajeTareas">No hay tareas creadas.</p>
+            </div>
+
+            <!-- PARTE INFERIOR -->
+
+            <div class="container-inferior">
+              <!-- PROXIMAS TAREAS -->
+
+              <div class="proximas">
+                <h2>Próximas tareas</h2>
+
+                <ul id="listaProximas">
+                  <li>No hay próximas tareas.</li>
+                </ul>
+              </div>
+
+              <!-- CALENDARIO -->
+
+              <div class="calendario">
+                <h2>Calendario</h2>
+
+                <p id="fechaActual">Calendario</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- DERECHA -->
+
+          <section class="derecha">
+            <!-- PROYECTOS -->
+
+            <div class="proyectos">
+              <h2>Proyectos</h2>
+
+              <p>Dashboard</p>
+
+              <p>Portafolio</p>
+
+              <p>Tienda Virtual</p>
+            </div>
+
+            <!-- PRIORIDADES -->
+
+            <div class="prioridades">
+              <h2>Prioridades</h2>
+
+              <p>Dashboard</p>
+
+              <p>Portafolio</p>
+
+              <p>JavaScript</p>
+            </div>
+          </section>
+        </div>
+
+        <!-- ================================= -->
+        <!-- MODAL NUEVA TAREA -->
+        <!-- ================================= -->
+
+        <div id="modalTarea" class="modal">
+          <div class="formulario-tarea">
+            <button id="cerrarModal" class="cerrar">✕</button>
+
+            <h2>Nueva tarea</h2>
+
+            <label for="tituloTarea"> Título </label>
+
+            <input
+              type="text"
+              id="tituloTarea"
+              placeholder="Nombre de la tarea"
+            />
+
+            <label for="descripcionTarea"> Descripción </label>
+
+            <textarea
+              id="descripcionTarea"
+              placeholder="Describe la tarea"
+            ></textarea>
+
+            <label for="prioridadTarea"> Prioridad </label>
+
+            <select id="prioridadTarea">
+              <option value="Alta">Alta</option>
+
+              <option value="Media">Media</option>
+
+              <option value="Baja">Baja</option>
+            </select>
+
+            <label for="fechaTarea"> Fecha límite </label>
+
+            <input type="date" id="fechaTarea" />
+
+            <button id="crearTarea" class="btn-crear">Crear tarea</button>
+          </div>
+        </div>
+
+        <!-- ================================= -->
+        <!-- MODAL PERFIL -->
+        <!-- ================================= -->
+
+        <div id="modalPerfil" class="modal">
+          <div class="formulario-tarea">
+            <button id="cerrarPerfil" class="cerrar">✕</button>
+
+            <h2>Mi perfil</h2>
+
+            <p>
+              <strong>Nombre:</strong>
+              <span id="nombrePerfil"> Andrés </span>
+            </p>
+
+            <p>
+              <strong>Usuario:</strong>
+              andres
+            </p>
+
+            <p>
+              <strong>Rol:</strong>
+              Usuario de TaskFlow
+            </p>
+
+            <button id="cerrarPerfilBoton" class="btn-crear">Cerrar</button>
+          </div>
+        </div>
+
+        <!-- ================================= -->
+        <!-- MODAL CONFIGURACION -->
+        <!-- ================================= -->
+
+        <div id="modalConfiguracion" class="modal">
+          <div class="formulario-tarea">
+            <button id="cerrarConfiguracion" class="cerrar">✕</button>
+
+            <h2>Configuración</h2>
+
+            <label for="nombreUsuario"> Nombre </label>
+
+            <input type="text" id="nombreUsuario" value="Andrés" />
+
+            <label for="modoTema"> Tema </label>
+
+            <select id="modoTema">
+              <option value="claro">Claro</option>
+
+              <option value="gris">Gris</option>
+            </select>
+
+            <button id="guardarConfiguracion" class="btn-crear">
+              Guardar cambios
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
